@@ -1,0 +1,55 @@
+<!-- calculator/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+{% if table_data %}
+<h2>Table</h2>
+<form method="post">
+  {% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Inflation for {{ country_name }}</th>
+        <th>Salary</th>
+        <th>Inflated Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for year, percentage, salary, inflated, inflation_percent in table_data %}
+      <tr>
+        <td>{{ year }}</td>
+        <td>{{ inflation_percent }}</td>
+        <td><input type="text" name="salaries_{{ year }}" value ="{{ salary }}"></td>
+        <td>{{ inflated }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit">Calculate</button>
+</form>
+
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,148 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+body {
+  background: #F7FBFC;
+  font-family: Open Sans;
+  font-size: 50px;
+  color: #000;
+}
+
+label {
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  display: block;
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: all 600ms;
+  transition: all 600ms;
+  z-index: 20;
+  border-radius: 25px;
+}
+
+.card div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #B9D7EA;
+  text-align: center;
+  line-height: 200px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 25px;
+}
+
+.card .back {
+  background: #769FCD;
+  color: #FFF;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+input {
+  display: none;
+}
+
+:checked + .card {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+
+.move-div {
+  position: absolute;
+  top: 15% !important;
+  left: 50%;
+  transform: translateX(-50%) translateY(20%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1050;
+}
+
+.text-mythingy {
+  color: red;
+  opacity: 1;
+  animation: hideElement 3s forwards;
+}
+
+@keyframes hideElement {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+*, *:after, *:before {
+  box-sizing: border-box;
+  font-family: roboto
+}
+
+.multigraph {
+  width: 10px;
+  height: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50% ;
+  margin: -150px;
+
+}
+.multigraph:before {
+  content: '';
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  border: 30px solid #B9D7EA;
+  border-radius: 300px 300px 0 0;
+  border-bottom: none;
+}
+.graph {
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  overflow:hidden;
+
+}
+.graph:before, .graph:after {
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  top: 100%;
+  border: 30px solid #769FCD;
+  content: '';
+  border-radius:0 0 300px 300px;
+  border-top: none;
+  animation: demo 3s;
+  transform-origin: center top;
+}
+
+@keyframes demo {
+  0% { transform: rotate(0deg) }
+}
