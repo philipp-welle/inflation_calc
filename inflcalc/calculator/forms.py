@@ -18,5 +18,5 @@ class update_length_form(forms.Form):
 
 class calcForm(forms.Form):
     # Define fields for form_a here
-    #field_a = forms.CharField(label='Field A', max_length=100)
+    starting_date = forms.CharField(label="Starting year", max_length=4, required=False)
     pass

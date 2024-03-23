@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import update_length_form
+from .forms import update_length_form, calcForm
 from .inflation_data import Inflation
 
 inflation = Inflation()
@@ -13,7 +13,7 @@ def index(request):
     inflated = [0] * len(years)
     salaries = [0] * len(years)
     if request.method == "POST":
-        form = update_length_form(request.POST)
+        form = calcForm(request.POST)
         if form.is_valid():
             # extract salaries from post data
             salaries = [float(request.POST.get(f"salaries_{year}")) or 0 for year in years]
