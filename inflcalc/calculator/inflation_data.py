@@ -5,19 +5,20 @@ import datetime
 class Inflation():
     def __init__(self):
         self.country = "DEU"
-        self.start_year = 2016
+        self.start_year = 2010
         response = requests.get(f"https://www.imf.org/external/datamapper/api/v1/PCPIPCH/{self.country}")
         response_country = requests.get(f"https://www.imf.org/external/datamapper/api/v1/countries")
         data_country = response_country.json()
         self.country_name = data_country["countries"][self.country]["label"] # Get the full country name based on the provide shortcut
         self.data = response.json()
-        self.get_data(self.start_year) # run the function to process the data based on the start date
+        #self.get_data(self.start_year) # run the function to process the data based on the start date
 
 
     def get_data(self, start_year):
         today = datetime.date.today()
         year = today.year
-        start_year = start_year
+        start_year = int(start_year)
+        print(start_year)
         self.new_dict = {int(year): value for year, value in
                          self.data["values"]["PCPIPCH"][self.country].items()}  # format the api data
 

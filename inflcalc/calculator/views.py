@@ -1,11 +1,22 @@
 from django.shortcuts import render, redirect
-from .forms import update_length_form, calcForm
+from .forms import update_length_form, calcForm, set_start_date
 from .inflation_data import Inflation
 
 inflation = Inflation()
 
+def landing(request):
+    if request.method == "POST":
+        form = set_start_date(request.POST)
+        if form.is_valid():
+            inflation.start_year = int(form.cleaned_data["year"])
+            print(inflation.start_year)
+            return redirect("index")
+    else:
+        form = set_start_date()
+        return render(request, "calculator/landing.html", {"form": form,})
 
 def index(request):
+    inflation.get_data(inflation.start_year)
     years = list(inflation.modified_dict.keys())[::-1]
     percent = [value[2] for value in inflation.modified_dict.values()][::-1]
     inflation_percent = [f"{value[0]}%" for value in inflation.modified_dict.values()][::-1]

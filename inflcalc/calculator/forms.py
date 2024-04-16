@@ -15,6 +15,9 @@ class update_length_form(forms.Form):
             raise forms.ValidationError("Please pick a year before 2023")
         return starting_date
 
+class set_start_date(forms.Form):
+    year = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'YYYY', 'style': 'width: 80px;', 'class': 'form-control'}))
+
 
 class calcForm(forms.Form):
     # Define fields for form_a here
