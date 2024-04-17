@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import update_length_form, calcForm, set_start_date
 from .inflation_data import Inflation
+import pycountry
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
@@ -11,10 +12,13 @@ def landing(request):
         form = set_start_date(request.POST)
         if form.is_valid():
             inflation.start_year = int(form.cleaned_data["year"])
+            alpha_2_country = form.cleaned_data["country"]
+            inflation.country = pycountry.countries.get(alpha_2=alpha_2_country).alpha_3 # change alpha_2 country code to alpha_3
             return redirect("calc")
     else:
         form = set_start_date()
         return render(request, "calculator/landing.html", {"form": form,})
+
 
 def calc(request):
     inflation.get_data(inflation.start_year)

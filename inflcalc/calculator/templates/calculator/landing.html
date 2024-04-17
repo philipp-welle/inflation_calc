@@ -5,23 +5,30 @@
     <meta charset="UTF-8">
     <title>Inflation Calculator</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
     <link rel="stylesheet" href="{% static 'calculator/style.css' %}">
 </head>
 <body>
-<div class="center">
-    <h3>Inflation Calculator</h3>
-    <p>Select your country and pick a year from where you want to start your calculation. </p>
-    <div class="row justify-content-center">
-        <form action="{% url 'landing' %}" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                {{ form.year }}
-            </div>
-            <div class="form-group">
-               <input class="btn btn-outline-light" type="submit" value="Submit">
-            </div>
-        </form>
+    <div class="center">
+        <h3>Inflation Calculator</h3>
+        <p>Select your country and pick a year from where you want to start your calculation. </p>
+
+        <div class="row justify-content-center">
+            <form action="{% url 'landing' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.country }}
+
+                    <br>
+                    {{ form.year }}
+                </div>
+
+                <div class="form-group">
+                   <input class="btn btn-outline-light" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </body>
 </html>

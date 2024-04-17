@@ -1,5 +1,6 @@
 from django import forms
 import re
+from django_countries.fields import CountryField
 
 
 class update_length_form(forms.Form):
@@ -17,6 +18,7 @@ class update_length_form(forms.Form):
 
 class set_start_date(forms.Form):
     year = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'YYYY', 'style': 'width: 80px;', 'class': 'form-control'}))
+    country = CountryField().formfield()
 
 
 class calcForm(forms.Form):

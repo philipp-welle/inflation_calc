@@ -16,7 +16,6 @@
     {{ form.as_p }}
     <input type="submit" value="Set Start Year">
 </form>
-<br>
 <div class="centerCalc">
     <form id="form_b" action="{% url 'calc' %}" method="post">
       {% csrf_token %}
