@@ -18,7 +18,7 @@ class Inflation():
         today = datetime.date.today()
         year = today.year
         start_year = int(start_year)
-        print(start_year)
+
         self.new_dict = {int(year): value for year, value in
                          self.data["values"]["PCPIPCH"][self.country].items()}  # format the api data
 

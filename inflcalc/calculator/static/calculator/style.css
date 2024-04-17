@@ -7,15 +7,26 @@ body {
 table {
     border-collapse: collapse;
     width: 100%;
+    padding: 15px;
+    text-align: center;
 }
 tr, td {
-    border: 1px inset white;
+    border: 1px inset grey;
     border-collapse: collapse;
     border-spacing: 0;
-    padding: 8px;
-    text-align: left;
+    padding: 15px;
+    text-align: center;
 }
 .center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.centerCalc{
+  width: 800px;
   position: absolute;
   left: 50%;
   top: 50%;
