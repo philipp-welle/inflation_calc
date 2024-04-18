@@ -1,48 +1,41 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'calculator/style.css' %}">
-</head>
-<body>
+{% extends 'calculator/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
 {% if table_data %}
-<h2>Inflation Calculator</h2>
 <form id="form_a" action="{% url 'update_length' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Set Start Year">
+    {{ form }}
+    <input type="submit" class="form-control" value="Update">
 </form>
 <div class="centerCalc">
-    <form id="form_b" action="{% url 'calc' %}" method="post">
-      {% csrf_token %}
-      <table>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Inflation for {{ country_name }}</th>
-            <th>Salary</th>
-            <th>Inflated Salary</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for year, percentage, salary, inflated, inflation_percent in table_data %}
-          <tr>
-            <th>{{ year }}</th>
-            <td>{{ inflation_percent }}</td>
-            <td><input type="text" name="salaries_{{ year }}" value ="{{ salary }}"></td>
-            <td>{{ inflated }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-        <br>
-      <button type="submit">Calculate</button>
-    </form>
+    <div class="row justify-content-center">
+        <p>Enter your salaries for the given years and hit calculate.</p>
+        <form id="form_b" action="{% url 'calc' %}" method="post">
+          {% csrf_token %}
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Inflation for {{ country_name }}</th>
+                <th>Salary</th>
+                <th>Inflated Salary</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for year, percentage, salary, inflated, inflation_percent in table_data %}
+              <tr>
+                <th>{{ year }}</th>
+                <td>{{ inflation_percent }}</td>
+                <td><input type="text" class="form-control" name="salaries_{{ year }}" value ="{{ salary }}"></td>
+                <td>{{ inflated }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+            <br>
+          <input class="btn btn-outline-light" type="submit" value="Calculate">
+        </form>
+    </div>
 </div>
 {% endif %}
-</body>
-</html>
+{% endblock %}
