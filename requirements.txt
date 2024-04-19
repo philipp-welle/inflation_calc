@@ -1,2 +1,5 @@
 Django~=5.0.3
 requests~=2.31.0
+django-crispy-forms~=2.1
+pycountry~=23.12.11
+countryinfo~=0.1.2
