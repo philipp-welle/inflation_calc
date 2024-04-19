@@ -12,13 +12,13 @@ table {
     text-align: center;
 }
 tr, td {
-    border: 1px inset grey;
     border-collapse: collapse;
     border-spacing: 0;
     padding: 15px;
     text-align: center;
 }
 .center {
+  width: 400px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -34,4 +34,16 @@ tr, td {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+}
+.form-control {
+    background-color: #191e2e;
+    color: #ffffff;
+}
+.form-control:focus {
+    background-color: #272e47;
+    color: #ffffff;
+}
+.form-select {
+    background-color: #191e2e;
+    color: #ffffff;
 }

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "bootstrap5",
     "crispy_forms",
     "crispy_bootstrap5",
     "calculator.apps.CalculatorConfig",

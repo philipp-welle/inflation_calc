@@ -1,24 +1,25 @@
 {% extends 'calculator/base.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
 {% if table_data %}
 <form id="form_a" action="{% url 'update_length' %}" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" class="form-control" value="Update">
+    {{ form_a.starting_date|as_crispy_field }}
+    <button type="submit" class="btn btn-outline-light">Update</button>
 </form>
 <div class="centerCalc">
     <div class="row justify-content-center">
         <p>Enter your salaries for the given years and hit calculate.</p>
         <form id="form_b" action="{% url 'calc' %}" method="post">
           {% csrf_token %}
-          <table>
+          <table class="table text-white">
             <thead>
               <tr>
-                <th>Year</th>
-                <th>Inflation for {{ country_name }}</th>
-                <th>Salary</th>
-                <th>Inflated Salary</th>
+                <th scope="col">Year</th>
+                <th scope="col">Inflation for {{ country_name }}</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Inflated Salary</th>
               </tr>
             </thead>
             <tbody>
@@ -33,7 +34,7 @@
             </tbody>
           </table>
             <br>
-          <input class="btn btn-outline-light" type="submit" value="Calculate">
+          <button type="submit" class="btn btn-outline-light">Calculate</button>
         </form>
     </div>
 </div>

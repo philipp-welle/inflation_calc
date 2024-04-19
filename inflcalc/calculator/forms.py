@@ -1,10 +1,16 @@
 from django import forms
 import re
 from django_countries.fields import CountryField
+from crispy_forms.helper import FormHelper
 
 
 class update_length_form(forms.Form):
-    starting_date = forms.CharField(label="Update start year", max_length=4, required=True)
+    def __init__(self, *args, **kwargs):
+        super(update_length_form, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+
+    starting_date = forms.CharField(max_length=4, required=True, widget=forms.TextInput(attrs={'placeholder': 'year'}))
 
     def clean_starting_date(self):
         starting_date = self.cleaned_data['starting_date']
@@ -17,8 +23,13 @@ class update_length_form(forms.Form):
         return starting_date
 
 class set_start_date(forms.Form):
-    country = CountryField().formfield()
-    year = forms.CharField(max_length=4, required=True, widget=forms.TextInput(attrs={'placeholder': 'YYYY', 'style': 'width: 80px;', 'class': 'form-control'}))
+    def __init__(self, *args, **kwargs):
+        super(set_start_date, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False
+
+    country = CountryField(blank_label='(select country)', max_length=50).formfield()
+    year = forms.CharField(max_length=4, required=True, widget=forms.TextInput(attrs={'placeholder': 'year'}))
 
     def clean_year(self):
         year = self.cleaned_data['year']
@@ -32,5 +43,4 @@ class set_start_date(forms.Form):
 
 
 class calcForm(forms.Form):
-    starting_date = forms.CharField(label="Starting year", max_length=4, required=False)
     pass
