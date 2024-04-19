@@ -3,11 +3,7 @@
 {% load crispy_forms_tags %}
 {% load crispy_forms_filters %}
 {% if table_data %}
-<form id="form_a" action="{% url 'update_length' %}" method="post">
-    {% csrf_token %}
-    {{ form_a.starting_date|as_crispy_field }}
-    <button type="submit" class="btn btn-outline-light">Update</button>
-</form>
+
 <div class="centerCalc">
     <div class="row justify-content-center">
         <p>Enter your salaries for the given years and hit calculate.</p>
@@ -35,6 +31,18 @@
           </table>
             <br>
           <button type="submit" class="btn btn-outline-light">Calculate</button>
+            <br>
+        </form>
+
+        <form id="form_a" action="{% url 'update_length' %}" method="post">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center mb-2">
+            <div data-mdb-input-init class="form-outline" style="width: 14rem">
+                <br>
+                {{ form_a.starting_date|as_crispy_field }}
+            </div>
+            <button type="submit" class="btn btn-outline-light btn-x">Change</button>
+        </div>
         </form>
     </div>
 </div>

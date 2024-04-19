@@ -23,7 +23,7 @@ class CommonFormHelpers:
 
 
 class UpdateLengthForm(CommonFormHelpers, forms.Form):
-    starting_date = forms.CharField(max_length=4, required=True, widget=forms.TextInput(attrs={'placeholder': 'year'}))
+    starting_date = forms.CharField(max_length=4, required=True, widget=forms.TextInput(attrs={'placeholder': 'change start year'}))
 
     def clean_starting_date(self):
         year = self.cleaned_data['starting_date']

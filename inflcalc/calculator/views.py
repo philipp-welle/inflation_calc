@@ -69,3 +69,5 @@ def update_length(request):
             return render(request, "calculator/home.html",
                           {"form_a": form_a, "table_data": inflation.table_data, "percent": inflation.percent,
                            "country_name": inflation.country_name})
+        # TODO 1 invalid input in update length clears all data
+        # TODO 2 remove required field for update length

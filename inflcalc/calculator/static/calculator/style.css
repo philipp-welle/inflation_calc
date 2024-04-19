@@ -47,3 +47,8 @@ tr, td {
     background-color: #191e2e;
     color: #ffffff;
 }
+.btn-x {
+    height:50%;
+    position: relative;
+    top: 23px;
+}
