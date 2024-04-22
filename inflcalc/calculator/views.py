@@ -6,7 +6,7 @@ from currency_symbols import CurrencySymbols
 from countryinfo import CountryInfo
 import locale
 
-locale.setlocale(locale.LC_ALL, '')
+locale.setlocale(locale.LC_ALL, "")
 
 inflation = Inflation()
 
@@ -35,7 +35,7 @@ def calc(request):
     currency_symbol = CurrencySymbols.get_symbol(
         currency)  # super complicated way to get currency symbol based on country code
     if request.method == "POST":
-        if 'calc_action' in request.POST:
+        if "calc_action" in request.POST:
             form_a = UpdateLengthForm()
             form_b = CalcForm(request.POST)
         else:
@@ -61,7 +61,7 @@ def calc(request):
 
 
 def update_length(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form_a = UpdateLengthForm(request.POST)
         if form_a.is_valid():
             starting_date = int(form_a.cleaned_data["starting_date"])
@@ -75,4 +75,3 @@ def update_length(request):
             return render(request, "calculator/home.html",
                           {"form_a": form_a, "table_data": inflation.table_data, "percent": inflation.percent,
                            "country_name": inflation.country_name})
-

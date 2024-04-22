@@ -23,27 +23,27 @@ class CommonFormHelpers:
 
 
 class UpdateLengthForm(CommonFormHelpers, forms.Form):
-    starting_date = forms.CharField(max_length=4, required=False, widget=forms.TextInput(attrs={'placeholder': 'change start year'}))
+    starting_date = forms.CharField(max_length=4, required=False, widget=forms.TextInput(attrs={"placeholder": "change start year"}), label="")
 
     def clean_starting_date(self):
-        year = self.cleaned_data['starting_date']
+        year = self.cleaned_data["starting_date"]
         self.validate_year(year)
         return year
 
 
 class SetStartDate(CommonFormHelpers, forms.Form):
-    country = CountryField(blank_label='(select country)', max_length=50).formfield()
-    year = forms.CharField(max_length=4, required=True, widget=forms.TextInput(attrs={'placeholder': 'year'}))
+    country = CountryField(blank_label="(select country)", max_length=50).formfield()
+    year = forms.CharField(max_length=4, required=True, widget=forms.TextInput(attrs={"placeholder": "year"}), label="")
 
     def clean_year(self):
-        year = self.cleaned_data['year']
+        year = self.cleaned_data["year"]
         self.validate_year(year)
         return year
 
 
 class CalcForm(forms.Form):
     salary = forms.CharField(required=False)
-    def validate_number(self, salary):
-        if isinstance(salary, str):
-            raise forms.ValidationError("Please enter a number")
-        return salary
+    #def validate_number(self, salary):
+        # if isinstance(salary, str):
+        #     raise forms.ValidationError("Please enter a number")
+        # return salary
