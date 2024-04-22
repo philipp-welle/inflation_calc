@@ -35,18 +35,22 @@ def calc(request):
     currency_symbol = CurrencySymbols.get_symbol(
         currency)  # super complicated way to get currency symbol based on country code
     if request.method == "POST":
-        form_a = UpdateLengthForm(request.POST)
-        form_b = CalcForm(request.POST)
+        if 'calc_action' in request.POST:
+            form_a = UpdateLengthForm()
+            form_b = CalcForm(request.POST)
+        else:
+            form_a = UpdateLengthForm(request.POST)
+            form_b = CalcForm(request.POST)
         if form_b.is_valid():
             # extract salaries from post data
             inflation.salaries = [float(request.POST.get(f"salaries_{year}")) or 0 for year in inflation.years]
             # calculate inflated salaries and format it to currency
             inflation.inflated = [f"{currency_symbol}{'{:0,.2f}'.format(round(salary * (percentage / 100), 2))}" for
-                        salary, percentage in zip(inflation.salaries, inflation.percent)]
+                            salary, percentage in zip(inflation.salaries, inflation.percent)]
             table_data = zip(inflation.years, inflation.percent, inflation.salaries, inflation.inflated, inflation.inflation_percent)
             return render(request, "calculator/home.html",
-                          {"form_a": form_a, "form_b": form_b, "table_data": table_data, "percent": inflation.percent,
-                           "country_name": country_name})
+                              {"form_a": form_a, "form_b": form_b, "table_data": table_data, "percent": inflation.percent,
+                               "country_name": country_name})
     else:
         form_a = UpdateLengthForm()
         form_b = CalcForm()
@@ -66,8 +70,9 @@ def update_length(request):
                           {"form_a": form_a, "table_data": inflation.table_data, "percent": inflation.percent,
                            "country_name": inflation.country_name})
         else: # needed for form validation
+            starting_date = inflation.start_year
+            inflation.get_data(starting_date)
             return render(request, "calculator/home.html",
                           {"form_a": form_a, "table_data": inflation.table_data, "percent": inflation.percent,
                            "country_name": inflation.country_name})
-        # TODO 1 invalid input in update length clears all data
-        # TODO 2 remove required field for update length
+

@@ -23,7 +23,7 @@ class CommonFormHelpers:
 
 
 class UpdateLengthForm(CommonFormHelpers, forms.Form):
-    starting_date = forms.CharField(max_length=4, required=True, widget=forms.TextInput(attrs={'placeholder': 'change start year'}))
+    starting_date = forms.CharField(max_length=4, required=False, widget=forms.TextInput(attrs={'placeholder': 'change start year'}))
 
     def clean_starting_date(self):
         year = self.cleaned_data['starting_date']
@@ -42,4 +42,8 @@ class SetStartDate(CommonFormHelpers, forms.Form):
 
 
 class CalcForm(forms.Form):
-    pass
+    salary = forms.CharField(required=False)
+    def validate_number(self, salary):
+        if isinstance(salary, str):
+            raise forms.ValidationError("Please enter a number")
+        return salary
